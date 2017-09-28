@@ -2,10 +2,10 @@
 
 # Set up variables and local directory
 UTIL_REPO_NAME="dl_utilities"
-UTIL_REPO_GIT_HASH="a4c70c3c35794a85c411ffda5bd5809027d310f1"
+UTIL_REPO_GIT_HASH="8e4065c1a32c55110c9b48cca7b6108408ea85b7"
 
 CNN_MODEL_REPO_NAME="state_of_art_cnns"
-CNN_MODEL_REPO_GIT_HASH="fa32da3967572f37de399241a87bcc9f7a9e028a"
+CNN_MODEL_REPO_GIT_HASH="c324facf63612dd237a3c48cd3590cb7f5fcb205"
 
 cd `dirname $0`
 

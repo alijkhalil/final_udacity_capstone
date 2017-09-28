@@ -1,3 +1,4 @@
+*.pyc
 state_of_art_cnns
 dl_utilities
 snap_weights

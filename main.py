@@ -9,6 +9,7 @@ from state_of_art_cnns.densenet import densenet
 from dl_utilities.trip_loss import trip_utils
 from dl_utilities.snapshots import snapshot_train_utils as snap_train
 from dl_utilities.snapshots import snapshot_eval_utils as snap_eval
+from dl_utilities.datasets import dataset_utils as ds_utils
 from dl_utilities.callbacks import callback_utils as cb_utils
 
 import numpy as np
@@ -109,31 +110,17 @@ if __name__ == '__main__':
     (x_train, y_train), (x_test, y_test) = cifar100.load_data()
     
     #  Normalize and kind of standardize data
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
-
     if legacy_preprocessing:
-        x_train /= 255 
-        x_train -= 0.5
-        
-        x_test /= 255
-        x_test -= 0.5
+        x_train, x_test = ds_utils.simple_image_preprocess(x_train, x_test)
     else:
-        for i in range(x_train.shape[-1]):
-            mean_val = np.mean(x_train[:, :, :, i])
-            
-            x_train[:, :, :, i] -= mean_val
-            x_train[:, :, :, i] /= 128
-            
-            x_test[:, :, :, i] -= mean_val
-            x_test[:, :, :, i] /= 128
-            
+        x_train, x_test = ds_utils.normal_image_preprocess(x_train, x_test)            
 
     # Convert class vectors to sparse/binary class matrices
     y_train = k_utils.to_categorical(y_train, nb_classes)
     y_test = k_utils.to_categorical(y_test, nb_classes)
 
-
+    quit()
+    
     # Set up image augmentation generator
     global_image_aug = ImageDataGenerator(
         rotation_range=10, 
